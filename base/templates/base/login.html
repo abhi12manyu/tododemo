@@ -1,8 +1,13 @@
 {% extends 'base/main.html' %}
 {% block content %}
+{% load socialaccount %}
 
 <div class="header-bar">
-    <h1>Login</h1>
+    <h1>Plan your day with Plan-To-Do</h1>
+</div>
+
+<div class="login-bar">
+    <h3>Login</h3>
 </div>
 
 <div class="card-body">
@@ -11,6 +16,14 @@
         {{form.as_p}}
         <input class="button" type="submit" value="Login">
     </form>
+    <br>
+    <div>
+        {% if user.is_authenticated %}
+        <p> Welcome, {{ user.username }} </p>
+        {% else %}
+        <a href="{% provider_login_url 'google' %}">Sign in with Google</a>
+        {% endif %}
+    <div/>
     <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
 </div>
 
